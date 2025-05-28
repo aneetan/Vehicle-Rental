@@ -6,7 +6,7 @@ const HeroSection = () => {
         <section className="relative min-h-[500px] bg-[#e6e0dc] overflow-hidden md:pt-30 items-center py-12">
             {/* ------- Background shape ------- */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className=" absolute top-0 right-0 left-1/2 bg-[#f86c23] transform -skew-x-12 origin-top-left">
+                <div className=" absolute top-0 right-0 left-1/2 bg-[var(--primary-color)] transform -skew-x-12 origin-top-left">
                 </div>
             </div>
 
@@ -17,14 +17,8 @@ const HeroSection = () => {
                         <p className="text-sm text-gray-500 md:text-lg mb-6">Explore our wide range of vehicles available for rent.</p>
 
                         <div className="flex flex-wrap gap-4 mb-6">
-                            {/* <button className="bg-[#f86c23] text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                                Rent Now
-                            </button> */}
                             <Button variant='primary'> Rent Now </Button>
                             <Button variant='secondary'> Learn More </Button>
-                            <button className="bg-transparent border-2 border-[#f86c23] text-[#f86c23] px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#F86C23] transition">
-                                Get Started
-                            </button>
                         </div>
                     </div>
 

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Button from "./Button";
 
 const Navbar = () => {
   const[isOpen, setIsOpen] = useState<boolean>(false);
@@ -6,7 +7,7 @@ const Navbar = () => {
     <>
       <div className="flex justify-between items-center bg-gray-100 p-6 shadow-md">
         <span className="font-bold text-2xl md:ml-12 ml-6"> Rent
-            <span className="text-[#F86C23]">-ALL </span>
+            <span className="text-[var(--primary-color)]">-ALL </span>
         </span>
 
         {/* -------------------- Menu for mobile view -------------------- */}
@@ -25,35 +26,33 @@ const Navbar = () => {
         {/* -------------- Navlinks --------------- */}
         <div className="hidden md:flex justify-center items-center">
             <ul className="flex space-x-8 text-base">
-                <li className="hover:text-[#F86C23] cursor-pointer">Home</li>
-                <li className="hover:text-[#F86C23] cursor-pointer">Rent</li>
-                <li className="hover:text-[#F86C23] cursor-pointer">How it works</li>
-                <li className="hover:text-[#F86C23] cursor-pointer">About</li>
-                <li className="hover:text-[#F86C23] cursor-pointer">FAQs</li>
-                <li className="hover:text-[#F86C23] cursor-pointer">Contact </li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">Home</li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">Rent</li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">How it works</li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">About</li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">FAQs</li>
+                <li className="hover:text-[var(--primary-color)] cursor-pointer">Contact </li>
             </ul> 
         </div> 
 
         {/* -------------- Login Button --------------- */} 
         <div className="hidden md:flex items-center mr-12">
-            <button className="bg-[#F86C23] text-white px-4 py-2 rounded hover:bg-[#f86e23e2]">Login</button>
+            <Button variant='primary'> Login </Button>
         </div> 
       </div>
 
       {isOpen && (
         <div className="md:hidden bg-gray-100 pb-4 px-6 shadow-md">
           <ul className="flex flex-col space-y-4 text-base mx-8 ">
-            <li className="hover:text-[#F86C23] cursor-pointer"> Home </li>
-            <li className="hover:text-[#F86C23] cursor-pointer"> Rent </li>
-            <li className="hover:text-[#F86C23] cursor-pointer"> How it works </li>
-            <li className="hover:text-[#F86C23] cursor-pointer"> About </li>
-            <li className="hover:text-[#F86C23] cursor-pointer"> FAQs </li>
-            <li className="hover:text-[#F86C23] cursor-pointer"> Contact </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> Home </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> Rent </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> How it works </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> About </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> FAQs </li>
+            <li className="hover:text-[var(--primary-color)] cursor-pointer"> Contact </li>
 
             <li>
-              <button className="bg-[#F86C23] text-white px-4 py-2 rounded hover:bg-[#f86e23e2] w-full">
-                Login
-              </button>
+              <Button variant='primary'> Login </Button>
             </li>
           </ul>
         </div>
