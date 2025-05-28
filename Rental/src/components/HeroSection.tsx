@@ -1,4 +1,5 @@
 import Image from '../assets/images/car.png'
+import Button from './Button'
 const HeroSection = () => {
   return (
     <>  
@@ -16,9 +17,11 @@ const HeroSection = () => {
                         <p className="text-sm text-gray-500 md:text-lg mb-6">Explore our wide range of vehicles available for rent.</p>
 
                         <div className="flex flex-wrap gap-4 mb-6">
-                            <button className="bg-[#f86c23] text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            {/* <button className="bg-[#f86c23] text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                                 Rent Now
-                            </button>
+                            </button> */}
+                            <Button variant='primary'> Rent Now </Button>
+                            <Button variant='secondary'> Learn More </Button>
                             <button className="bg-transparent border-2 border-[#f86c23] text-[#f86c23] px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#F86C23] transition">
                                 Get Started
                             </button>
