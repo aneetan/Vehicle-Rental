@@ -16,12 +16,12 @@ const CustomAccordion = ({id, title, content} : AccordionProps) => {
     return (
         <>
             {/* ---------- Accordion ---------- */}
-            <div id='accordion-collapse' className='w-1/2'>
+            <div id='accordion-collapse' className='md:w-1/2 w-full'>
                 <div className="mb-2">
                     <h2 className={`accordion-collapse-${id}`}>
                         <button type='button' className='flex items-center justify-between w-full p-5 font-medium 
                         rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl focus:ring-2
-                        focus:ring-gray-200 hover:bg-gray-100 gap-3'
+                        focus:ring-orange-200 hover:bg-gray-100 gap-3'
                         onClick={() => toggleAccordion(`accordion-collapse-body-${id}`)}
                         aria-expanded={openAccordion === `accordion-collapse-body-${id}`}
                         aria-controls={`accordion-collapse-body-${id}`}

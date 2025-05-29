@@ -1,6 +1,6 @@
-import RentAVehicle from '../assets/images/rent.png'
-import DriveVehicle from '../assets/images/drive.png'
-import DropVehicle from '../assets/images/drop.png'
+import RentAVehicle from '../../assets/images/rent.png'
+import DriveVehicle from '../../assets/images/drive.png'
+import DropVehicle from '../../assets/images/drop.png'
 
 const HowItWorks = () => {
   return (
@@ -44,7 +44,6 @@ const HowItWorks = () => {
               <p className="text-sm text-gray-600">Drop off the car at the selected location and you're done!</p>
             </div>
           </div>
-
         </div>
         </section>
     </>

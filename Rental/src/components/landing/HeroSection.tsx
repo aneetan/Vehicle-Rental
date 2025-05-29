@@ -1,5 +1,5 @@
-import Image from '../assets/images/car.png'
-import Button from './Button'
+import Image from '../../assets/images/car.png'
+import Button from '../custom/Button'
 const HeroSection = () => {
   return (
     <>  
@@ -26,7 +26,7 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    <div className="w-full hidden md:block md:w-[1/2] relative">
+                    <div className="w-full hidden md:block relative">
                         <div className="relative md:absolute md:-right-20 md:-top-20">
                             <img 
                                 src={Image}

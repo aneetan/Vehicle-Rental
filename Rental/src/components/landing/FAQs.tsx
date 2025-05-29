@@ -1,18 +1,13 @@
-import React, { useState } from 'react'
-import CustomAccordion from './CustomAccordion';
+import CustomAccordion from '../custom/CustomAccordion';
 
 const FAQs = () => {
-    const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
-    const toggleAccordion = (id:string) : void => {
-        setOpenAccordion(openAccordion === id? null : id);
-    };
   return (
-    <section className="bg-gray-100 px-12">
-        <div className="container px-6 pt-20 pb-24 lg:pb-24 lg:py-18 flex flex-col items-center">
-            <div className="flex flex-col items-center justify-center mb-12 mx-12">
+    <section className="bg-gray-100 md:px-12 px-6">
+        <div className="container px-6 pt-20 pb-24 lg:pb-24 lg:py-18 md:flex flex-col items-center">
+            <div className="flex flex-col items-center justify-center md:mb-12 mx-12">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">Frequently Asked Questions
-                    <hr className="w-[30%] bg-[var(--primary-color)] absolute left-1/2 py-0.5 border-none -translate-x-1/2 bottom-[-8px] mx-auto" />
+                    <hr className="w-[25%] bg-[var(--primary-color)] absolute left-1/2 py-0.5 border-none -translate-x-1/2 bottom-[-8px] mx-auto" />
                 </h2>
             </div>
 

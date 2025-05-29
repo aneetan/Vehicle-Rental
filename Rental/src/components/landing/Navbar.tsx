@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Button from "./Button";
+import Button from "../custom/Button";
 
 const Navbar = () => {
   const[isOpen, setIsOpen] = useState<boolean>(false);

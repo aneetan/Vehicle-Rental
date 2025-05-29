@@ -1,7 +1,7 @@
-import Fast from '../assets/images/quick.png';
-import Ride from '../assets/images/bicycle.png';
-import Fee from '../assets/images/money.png';
-import Image from '../assets/images/car.png';
+import Fast from '../../assets/images/quick.png';
+import Ride from '../../assets/images/bicycle.png';
+import Fee from '../../assets/images/money.png';
+import Image from '../../assets/images/car.png';
 
 const AboutUs = () => {
   return (
