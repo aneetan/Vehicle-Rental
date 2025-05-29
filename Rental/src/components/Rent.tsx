@@ -1,6 +1,7 @@
-import Button from "./Button"
+import { useState } from "react";
 
 const Rent = () => {
+const [selectedValue, setSelectedValue] = useState<string>('');
   return (
     <>
         <section className=" flex justify-center h-0 items-center bg-gray-200 text-gray-800 z-100 ">
@@ -10,8 +11,11 @@ const Rent = () => {
                         <div>
                             <label className="block text-gray-700 mb-2 font-medium text-sm">Choose a vehicle</label>
                             <div className="relative">
-                                <select className="w-full text-sm p-3 pl-10 border border-gray-300 rounded-lg appearance-none">
-                                    <option value="" disabled selected>Select vehicle</option>
+                                <select className="w-full text-sm p-3 pl-10 border border-gray-300 rounded-lg appearance-none"
+                                value={selectedValue}
+                                onChange={(e)=> setSelectedValue(e.target.value)}
+                                >
+                                    <option value="" disabled>Select vehicle</option>
                                     <option value="car">Car</option>
                                     <option value="bike">Bike</option>
                                     <option value="scooter">Scooter</option>

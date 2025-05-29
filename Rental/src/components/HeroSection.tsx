@@ -13,7 +13,11 @@ const HeroSection = () => {
             <div className="container mx-auto px-4 relative z-10 md:mx-12">
                 <div className="flex flex-col md:flex-row items-center">
                     <div className="w-full md:w-[1/2] mb-8 md:mb-0">
-                        <h1 className="text-3xl md:text-5xl font-bold mb-4">Rent Your <br/> Dream Vehicle</h1>
+                    
+                        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                            Need to Go? <br/>
+                            <span className='text-[var(--primary-color)]'> We've Got the Keys! </span>
+                        </h1>
                         <p className="text-sm text-gray-500 md:text-lg mb-6">Explore our wide range of vehicles available for rent.</p>
 
                         <div className="flex flex-wrap gap-4 mb-6">

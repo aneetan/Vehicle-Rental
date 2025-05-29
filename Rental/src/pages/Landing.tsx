@@ -1,3 +1,4 @@
+import AboutUs from "../components/AboutUs"
 import HeroSection from "../components/HeroSection"
 import HowItWorks from "../components/HowItWorks"
 import Navbar from "../components/Navbar"
@@ -10,6 +11,7 @@ const Landing = () => {
       <HeroSection/>
       <Rent/>
       <HowItWorks/>
+      <AboutUs/>
     </>
   )
 }
