@@ -20,34 +20,34 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-1/2">
+                <div className="md:w-1/2 w-full">
                     <div className="flex flex-col mb-6">
                         <h2 className=" relative text-3xl font-semibold mb-8 text-gray-900"> Feel the best experience <br/> with our rentals 
                             <hr className="w-[10%] bg-[var(--primary-color)] absolute py-0.5 border-none bottom-[-8px] mx-auto" />
                         </h2>
                     </div>
                 
-                    <ol className="relative text-gray-800 border-s border-gray-200">                  
+                    <ol className="relative text-gray-800 border-s border-orange-200">                  
                         <li className="mb-10 ms-6">            
-                             <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                             <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
                                 <img src={Fast}/>
                             </span>
                             <h3 className="font-medium leading-tight"> Fast & Easy </h3>
-                            <p className="text-sm w-1/2">Book your ride in minutes — no waiting, no hassle. </p>
+                            <p className="text-sm w-full md:w-1/2">Book your ride in minutes — no waiting, no hassle. </p>
                         </li>
                         <li className="mb-10 ms-6">
-                            <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                            <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
                                 <img src={Ride}/>
                             </span>
                             <h3 className="font-medium leading-tight">Rides That Fit</h3>
-                            <p className="text-sm w-1/2">From city cars to gateways — pick what works for you</p>
+                            <p className="text-sm w-full md:w-1/2">From city cars to gateways — pick what works for you</p>
                         </li>
                         <li className="mb-10 ms-6">
-                            <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                            <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white ">
                                 <img src={Fee}/>
                             </span>
                             <h3 className="font-medium leading-tight">No Surprises</h3>
-                            <p className="text-sm w-1/2">Clear pricing - Pay only for what you use.</p>
+                            <p className="text-sm w-full md:w-1/2">Clear pricing - Pay only for what you use.</p>
                         </li>  
                     </ol>
                 </div>
