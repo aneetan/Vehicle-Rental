@@ -3,7 +3,7 @@ import Button from '../custom/Button'
 const HeroSection = () => {
   return (
     <>  
-        <section className="relative min-h-[500px] bg-[#e6e0dc] overflow-hidden md:pt-30 items-center py-12 px-6">
+        <section className="relative min-h-[500px] bg-gray-100 overflow-hidden md:pt-30 items-center py-12 px-6">
             {/* ------- Background shape ------- */}
             <div className="absolute inset-0 overflow-hidden mx-12">
                 <div className=" absolute top-0 right-0 left-1/2 bg-[var(--primary-color)] transform -skew-x-12 origin-top-left">

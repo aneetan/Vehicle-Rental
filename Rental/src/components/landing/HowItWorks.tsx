@@ -5,7 +5,7 @@ import DropVehicle from '../../assets/images/drop.png'
 const HowItWorks = () => {
   return (
     <>
-      <section className="bg-gray-100">
+      <section>
         <div className="container px-6 pt-60 pb-24 lg:pb-24 lg:py-36">
           <div className="flex flex-col items-center mb-12">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">How It Works?

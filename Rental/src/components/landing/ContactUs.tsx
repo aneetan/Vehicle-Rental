@@ -57,7 +57,7 @@ const ContactUs = () => {
                                 type="email"
                                 id="email"
                                 name="email"
-                                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]
+                                className={`w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--primary-color)]
                                 }`}
                                 placeholder="your@email.com"
                             />
@@ -71,7 +71,7 @@ const ContactUs = () => {
                                 id="message"
                                 name="message"
                                 rows={4}
-                                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] 
+                                className={`w-full px-4 py-2 border resize-none border-gray-500 rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--primary-color)] 
                                 }`}
                                 placeholder="Your message here..."
                             ></textarea>
