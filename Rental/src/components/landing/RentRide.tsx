@@ -87,7 +87,7 @@ const RentRide = () => {
     ]
 
   return (
-    <section className="bg-gray-100">
+    <section className="bg-gray-100" id='#rent'>
         <div className="container px-24 pt-40 pb-24 lg:pb-24 lg:py-12">
             <div className="flex flex-col items-center mb-6">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">Rent Your Perfect Ride

@@ -11,15 +11,29 @@ import RentRide from "../components/landing/RentRide"
 const Landing = () => {
   return (
     <>
-      <Navbar/>
-      <HeroSection/>
-      <Rent/>
-      <HowItWorks/>
-      <RentRide/>
-      <AboutUs/>
-      <FAQs/>
-      <ContactUs/>
-      <CustomFooter/>
+      <div className="landing-page">
+      <HeroSection />
+      
+      <section id="rent">
+        <RentRide />
+      </section>
+      
+      <section id="how-it-works">
+        <HowItWorks />
+      </section>
+      
+      <section id="about">
+        <AboutUs />
+      </section>
+      
+      <section id="faqs">
+        <FAQs />
+      </section>
+      
+      <section id="contact">
+        <ContactUs />
+      </section>
+    </div>
     </>
   )
 }
