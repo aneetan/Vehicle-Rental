@@ -1,11 +1,11 @@
-import { lazy, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../custom/Button";
-import { useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 
 //define routes for type safety
 const AppRoutes = {
-  HOME: "/",
-  RENT: "/#rent",
+  HOME: "#home",
+  RENT: "#rent",
   HOW_IT_WORKS: "#how-it-works",
   ABOUT: "#about",
   FAQS: "#faqs",
@@ -124,7 +124,9 @@ const Navbar = () => {
                 className={`${isActive === item.key ? 'text-[var(--primary-color)] font-semibold': ''} 
                 cursor-pointer  hover:text-[var(--primary-color)]`}
                 >
-                  <a onClick={() => handleActiveState(item.key)}>{item.label}</a>
+                  <NavLink to={item.path} end
+                  onClick={() => handleActiveState(item.key)}> {item.label}
+                  </NavLink>
                 </li>
               ))}   
             </ul> 

@@ -12,7 +12,11 @@ const Landing = () => {
   return (
     <>
       <div className="landing-page">
-      <HeroSection />
+        <section id="home">
+          <HeroSection />
+        </section>
+
+        <Rent/>
       
       <section id="rent">
         <RentRide />

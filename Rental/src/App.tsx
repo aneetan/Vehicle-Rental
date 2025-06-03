@@ -8,19 +8,17 @@ import FAQs from './components/landing/FAQs'
 import ContactUs from './components/landing/ContactUs'
 import Navbar from './components/landing/Navbar'
 import HeroSection from './components/landing/HeroSection'
+import LandingLayout from './pages/layout/LandingLayout'
 
 function App() {
 
   return (
     <Router>
-      <Navbar/>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          {/* <Route path="/#rent" element={<RentRide />} />
-          <Route path="/#how-it-works" element={<HowItWorks />} />
-          <Route path="/#about" element={<AboutUs />} />
-          <Route path="/#faqs" element={<FAQs />} />
-          <Route path="/#contact" element={<ContactUs />} /> */}
+          <Route path='/' element={<LandingLayout/>}>
+            <Route path="/" element={<Landing />} />
+            <Route path='/rent' element={<RentRide/>}/>
+          </Route>
         </Routes>
     </Router>
   )

@@ -4,7 +4,7 @@ const Rent = () => {
 const [selectedValue, setSelectedValue] = useState<string>('');
   return (
     <>
-        <section className=" flex justify-center h-0 items-center bg-gray-200 text-gray-800 z-100 ">
+        <section className=" flex justify-center h-0 items-center bg-gray-200 text-gray-800 z-100">
             <div className="w-full relative lg:w-[70%]">
                 <div className="bg-white p-6 rounded-lg shadow-xl">
                     <form className=" md:flex justify-between grid-cols-1 space-y-4 mx-12 md:mx-12">

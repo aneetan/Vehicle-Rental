@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../custom/Button';
+import { FaUserFriends, FaTachometerAlt, FaGasPump, FaBolt, FaCogs } from 'react-icons/fa';
 
 enum VehicleType {
     CAR = 'cars',
@@ -8,7 +9,7 @@ enum VehicleType {
 }
 
 interface VehicleDetail {
-    icon: string;
+    type: 'seats' | 'settings' | 'engine' | 'fuel' | 'range' | 'speed';
     text: string;
 }
 
@@ -27,6 +28,25 @@ type VehiclesData ={
 const RentRide = () => {
     const [activeVehicle, setActiveVehicle] = useState<VehicleType>(VehicleType.CAR);
 
+    //function to get the icon
+    const getIcon = (detailType: string) => {
+      switch(detailType){
+        case 'seats':
+          return <FaUserFriends className='mr-1'/> ;
+        case "settings":
+          return <FaCogs className='mr-1'/>
+        case 'engine':
+          return <FaTachometerAlt className='mr-1'/>;
+        case 'fuel':
+          return <FaGasPump className='mr-1'/>
+        case 'range':
+          return <FaBolt className='mr-1'/>
+        case 'speed':
+          return <FaTachometerAlt className='mr-1'/>
+        default:
+          return null;
+      }
+    }
     const vehiclesData: VehiclesData = {
     [VehicleType.CAR]: [
       {
@@ -35,8 +55,8 @@ const RentRide = () => {
         title: 'Economy Class',
         description: 'Perfect for city driving',
         details: [
-          { icon: '', text: '4 seats' },
-          { icon: '⚙️', text: 'Automatic' }
+          { type: 'seats', text: '4 seats' },
+          { type: 'settings', text: 'Automatic' }
         ],
         price: '$35/day'
       },
@@ -46,8 +66,8 @@ const RentRide = () => {
         title: 'SUV',
         description: 'Great for family trips',
         details: [
-          { icon: '👤', text: '7 seats' },
-          { icon: '⚙️', text: 'Automatic' }
+          { type: 'seats', text: '7 seats' },
+          { type: 'settings', text: 'Automatic' }
         ],
         price: '$65/day'
       }
@@ -59,8 +79,8 @@ const RentRide = () => {
         title: 'Sports Bike',
         description: 'For the thrill seekers',
         details: [
-          { icon: '🏍️', text: '300cc' },
-          { icon: '⛽', text: 'Petrol' }
+          { type: 'engine', text: '300cc' },
+          { type: 'fuel', text: 'Petrol' }
         ],
         price: '$25/day'
       }
@@ -72,8 +92,8 @@ const RentRide = () => {
         title: 'Electric Scooter',
         description: 'Eco-friendly city travel',
         details: [
-          { icon: '🔋', text: '60km range' },
-          { icon: '⚡', text: '45km/h' }
+          { type: 'range', text: '60km range' },
+          { type: 'speed', text: '45km/h' }
         ],
         price: '$15/day'
       }
@@ -87,7 +107,7 @@ const RentRide = () => {
     ]
 
   return (
-    <section className="bg-gray-100" id='#rent'>
+    <section className="bg-white pt-20" id='#rent'>
         <div className="container px-24 pt-40 pb-24 lg:pb-24 lg:py-12">
             <div className="flex flex-col items-center mb-6">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">Rent Your Perfect Ride
@@ -135,7 +155,7 @@ const RentRide = () => {
                     <div className="flex gap-4 mb-4">
                     {vehicle.details.map((detail, index) => (
                         <span key={index} className="flex items-center text-sm text-gray-500">
-                        <span className="mr-1">{detail.icon}</span>
+                          {getIcon(detail.type)}
                         {detail.text}
                         </span>
                     ))}

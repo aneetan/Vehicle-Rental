@@ -5,7 +5,7 @@ import Image from '../../assets/images/car.png';
 
 const AboutUs = () => {
   return (
-    <section className="overflow-hidden pb-24 pt-24">
+    <section className="overflow-hidden pb-24 pt-34">
         <div className="container mx-auto px-4">
           
             <div className="flex flex-wrap items-center justify-between mx-14">
