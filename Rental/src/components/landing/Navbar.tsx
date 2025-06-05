@@ -43,14 +43,10 @@ const Navbar = () => {
   }
 
   const handleNavigate = (path: string):void => {
-    if (path.startsWith("#")) {
       const element = document.getElementById(path.substring(1));
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
-    } else {
-      navigate(path);
-    }
     setIsOpen(false);
   };
 
