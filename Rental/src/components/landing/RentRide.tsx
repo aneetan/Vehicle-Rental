@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button, { ButtonType } from '../custom/Button';
 import { FaUserFriends, FaTachometerAlt, FaGasPump, FaBolt, FaCogs } from 'react-icons/fa';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 enum VehicleType {
     CAR = 'cars',
