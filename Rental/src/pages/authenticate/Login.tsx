@@ -1,13 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button, { ButtonType } from '../../components/custom/Button';
 import Image from '../../assets/images/image.png'
 import Logo from '../../components/Logo';
+import { FcGoogle } from "react-icons/fc";
+import { useAuth } from '../../context/authContext';
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../firebase/auth';
+import { useNavigate } from 'react-router';
+
+interface User{
+  email: string,
+  password: string
+}
 
 const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Login submitted');
+  // const {userLoggedIn} = useAuth();
+  const [formData, setFormData] = useState<User>({
+    email: '',
+    password: ''
+  });
+  
+  const navigate = useNavigate();
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await doSignInWithEmailAndPassword(formData);    
+  };
+
+  const handleGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    doSignInWithGoogle()
+    .catch(err => {
+      console.log(err)
+    })
+    navigate('/')
+  }
 
   return (
     <section className="flex justify-center items-center min-h-screen bg-gray-50 p-12">
@@ -33,6 +68,9 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg"
                 placeholder="Enter your email"
                 required
@@ -44,6 +82,9 @@ const Login = () => {
               <input
                 type="password" 
                 id="password"
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg"
                 placeholder="Enter your password"
                 required
@@ -55,7 +96,7 @@ const Login = () => {
                 <input
                   type="checkbox"
                   id="remember"
-                  className="h-4 w-4 text-[var(--primary-color)] focus:ring-[var(--primary-color)] border-gray-300 rounded"
+                  className="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded"
                 />
                 <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">Remember me</label>
               </div>
@@ -67,6 +108,24 @@ const Login = () => {
             >
               Login
             </Button>
+
+             <div className="relative my-6">
+                  <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">OR</span>
+                  </div>
+              </div>
+  
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition duration-200"
+            >
+              <FcGoogle className="text-xl" />
+              Login with Google
+            </button>
 
             <div className="text-center text-sm text-gray-500">
               Don't have an account?{' '}

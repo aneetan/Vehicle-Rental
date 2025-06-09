@@ -2,6 +2,8 @@ import React from 'react';
 import Button, { ButtonType } from '../../components/custom/Button';
 import Image from '../../assets/images/register.png';
 import Logo from '../../components/Logo'; 
+import { FcGoogle } from 'react-icons/fc';
+
 
 const Register = () => {
   const handleSubmit = (e) => {
@@ -103,6 +105,24 @@ const Register = () => {
             >
               Create Account
             </Button>
+
+            <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">OR</span>
+                </div>
+            </div>
+
+          <button
+            type="button"
+            // onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition duration-200"
+          >
+            <FcGoogle className="text-xl" />
+            Sign up with Google
+          </button>
 
             <div className="text-center text-sm text-gray-500 pt-4">
               Already have an account?{' '}

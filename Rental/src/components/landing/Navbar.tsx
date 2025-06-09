@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Button from "../custom/Button";
+import Button, { ButtonType } from "../custom/Button";
 import { NavLink, useLocation, useNavigate } from "react-router";
 
 //define routes for type safety
@@ -130,7 +130,7 @@ const Navbar = () => {
 
         {/* -------------- Login Button --------------- */} 
         <div className="hidden md:flex items-center mr-12">
-            <Button variant='primary'> Login </Button>
+            <Button variant={ButtonType.primary} onClick={() => navigate('/login')}> Login </Button>
         </div> 
       </div>
 

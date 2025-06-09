@@ -8,7 +8,7 @@ export enum ButtonType{
 interface ButtonProps{
     variant : ButtonType,
     children : React.ReactNode,
-    onClick?: React.ReactEventHandler,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     className?: string
 }
 
