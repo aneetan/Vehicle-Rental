@@ -1,5 +1,4 @@
 import React from 'react'
-import Carousel from '../components/custom/Carousel'
 import { useNavigate } from 'react-router'
 import { FaCalendar, FaGasPump, FaHeart, FaShareAlt, FaStar, FaUsers } from 'react-icons/fa';
 import Button, { ButtonType } from '../components/custom/Button';

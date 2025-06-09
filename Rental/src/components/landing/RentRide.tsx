@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import Button from '../custom/Button';
+import Button, { ButtonType } from '../custom/Button';
 import { FaUserFriends, FaTachometerAlt, FaGasPump, FaBolt, FaCogs } from 'react-icons/fa';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 enum VehicleType {
     CAR = 'cars',
@@ -27,6 +28,12 @@ type VehiclesData ={
 }
 const RentRide = () => {
     const [activeVehicle, setActiveVehicle] = useState<VehicleType>(VehicleType.CAR);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const topPadding = location.pathname ==='/searchVehicles' ? 'pt-4' : 'pt-20';
+    const isSearchPage = location.pathname === '/searchVehicles';
+
 
     //function to get the icon
     const getIcon = (detailType: string) => {
@@ -106,8 +113,12 @@ const RentRide = () => {
         {id: VehicleType.SCOOTER, label: 'Scooter'}
     ]
 
+    const handleViewDetails = () => {
+      navigate('/viewDetails');
+    }
+
   return (
-    <section className="bg-white pt-20" id='#rent'>
+    <section className= {`bg-white ${topPadding} `} id='#rent'>
         <div className="container px-24 pt-40 pb-24 lg:pb-24 lg:py-12">
             <div className="flex flex-col items-center mb-6">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">Rent Your Perfect Ride
@@ -117,6 +128,21 @@ const RentRide = () => {
                     <hr className="w-[40%] bg-[var(--primary-color)] absolute left-1/2 py-0.5 border-none -translate-x-1/2 bottom-[-8px] mx-auto" />
                 </h2>
             </div>
+
+
+            {/* only show the search abr if it is a searchVehicle page */}
+            {isSearchPage && (
+              <div className='flex justify-center items-center'>
+                <form className="flex mb-6 w-1/2">
+                  <input
+                    type="search"
+                    placeholder="Search rides here..."
+                    className="flex-1 px-4 py-2 text-gray-700 bg-white border border-gray-300
+                      rounded-3xl focus:outline-none focus:ring-1 focus:ring-[var(--primary-color)] focus:border-transparent"
+                  />
+                </form>
+              </div>
+            )}
 
             {/* Tabs */}
             <div className="flex justify-center mb-8">
@@ -146,41 +172,52 @@ const RentRide = () => {
                     alt={vehicle.title}
                     className="w-full h-48 object-cover"
                 />
-                <div className="p-5">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-1">
-                    {vehicle.title}
-                    </h3>
-                    <p className="text-gray-600 mb-3">{vehicle.description}</p>
-                    
-                    <div className="flex gap-4 mb-4">
-                    {vehicle.details.map((detail, index) => (
-                        <span key={index} className="flex items-center text-sm text-gray-500">
-                          {getIcon(detail.type)}
-                        {detail.text}
-                        </span>
-                    ))}
+                <div className="p-5 flex flex-row justify-between">
+                  <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                      {vehicle.title}
+                      </h3>
+                      <p className="text-gray-600 mb-3">{vehicle.description}</p>
+                      
+                      <div className="flex gap-4 mb-4">
+                      {vehicle.details.map((detail, index) => (
+                          <span key={index} className="flex items-center text-sm text-gray-500">
+                            {getIcon(detail.type)}
+                          {detail.text}
+                          </span>
+                      ))}
+                      </div>
                     </div>
-                    
-                    <div className="flex items-center justify-between mt-4">
-                    <span className="text-lg font-semibold text-[var(--primary-color)]">
+
+                    <div>
+                      <span className="text-lg font-semibold text-[var(--primary-color)]">
                         {vehicle.price}
-                    </span>
-                    <Button variant='primary'>Rent Now</Button>
+                      </span>
                     </div>
-                </div>
+                   </div> 
+
+                    
+                    <div className="flex items-center justify-between m-4">
+                      <Button variant={ButtonType.primary}>Rent Now</Button>
+                      <Button variant={ButtonType.secondary} onClick={handleViewDetails}> View Details </Button>
+                    </div>
                 </div>
             ))}
             </div>
 
-            <div className="text-center">
-            <a
-                href="/vehicles"
-                className="inline-block px-8 py-3 border-2 border-[var(--primary-color)] text-[var(--primary-color)]
-                font-medium rounded-full hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-            >
-                View All Vehicles
-            </a>
-            </div>
+            {!isSearchPage &&(
+              <div className="text-center">
+                <a
+                    href="/vehicles"
+                    className="inline-block px-8 py-3 border-2 border-[var(--primary-color)] text-[var(--primary-color)]
+                    font-medium rounded-full hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                >
+                    View All Vehicles
+                </a>
+              </div>
+            )}
+
+            
       </div>
     </section>
   )
