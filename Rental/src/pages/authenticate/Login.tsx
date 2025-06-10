@@ -3,9 +3,9 @@ import Button, { ButtonType } from '../../components/custom/Button';
 import Image from '../../assets/images/image.png'
 import Logo from '../../components/Logo';
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from '../../context/authContext';
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../firebase/auth';
 import { useNavigate } from 'react-router';
+import { firebaseLoginErrorMessages } from '../../firebase/firebaseErrors';
 
 interface User{
   email: string,
@@ -13,11 +13,14 @@ interface User{
 }
 
 const Login = () => {
-  // const {userLoggedIn} = useAuth();
   const [formData, setFormData] = useState<User>({
     email: '',
     password: ''
   });
+
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
   
   const navigate = useNavigate();
 
@@ -32,16 +35,37 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await doSignInWithEmailAndPassword(formData);    
+    setIsLoading(true);
+
+    try {
+      await doSignInWithEmailAndPassword(formData);
+      navigate("/");
+    } catch (e: unknown) {
+      let message = "An unknown error occurred";
+      if (typeof e === "object" && e !== null && "code" in e) {
+        const err = e as { code: string; message: string };
+        message = firebaseLoginErrorMessages[err.code] || err.message || message;
+      } else if (e instanceof Error) {
+        message = e.message;
+      }
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleGoogleLogin = async(e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    doSignInWithGoogle()
-    .catch(err => {
-      console.log(err)
-    })
-    navigate('/')
+    setIsGoogleLoading(true);
+     try {
+      await doSignInWithGoogle();
+      console.log("Logij with google")
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsGoogleLoading(false);
+    } 
   }
 
   return (
@@ -63,6 +87,7 @@ const Login = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Login to Rent-ALL</h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
+            {error && <span className='text-red-500 text-sm'> {error}</span>}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
               <input
@@ -71,9 +96,8 @@ const Login = () => {
                 name='email'
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm"
                 placeholder="Enter your email"
-                required
               />
             </div>
 
@@ -85,9 +109,8 @@ const Login = () => {
                 name='password'
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm"
                 placeholder="Enter your password"
-                required
               />
             </div>
 
@@ -109,7 +132,7 @@ const Login = () => {
               Login
             </Button>
 
-             <div className="relative my-6">
+             <div className="relative">
                   <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>
                   </div>
@@ -124,7 +147,7 @@ const Login = () => {
               className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition duration-200"
             >
               <FcGoogle className="text-xl" />
-              Login with Google
+              Sign in with Google
             </button>
 
             <div className="text-center text-sm text-gray-500">
