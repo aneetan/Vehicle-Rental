@@ -7,6 +7,7 @@ import VehicleDetails from './pages/VehicleDetails'
 import SearchVehicles from './pages/SearchVehicles'
 import Register from './pages/authenticate/Register'
 import Login from './pages/authenticate/Login'
+import RequestBooking from './pages/RequestBooking'
 
 function App() {
 
@@ -18,12 +19,12 @@ function App() {
             <Route path='/rent' element={<RentRide/>}/>
             <Route path='/viewDetails' element={<VehicleDetails/>}/>
             <Route path='/searchVehicles' element={<SearchVehicles/>}/>
+            <Route path='/requestBooking' element={<RequestBooking/>} />
+            <Route path='/viewBookings' element= {<div> View Bookings </div>} />
           </Route>
 
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
-
-
         </Routes>
     </Router>
   )

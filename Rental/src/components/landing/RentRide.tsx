@@ -208,7 +208,7 @@ const RentRide = () => {
             {!isSearchPage &&(
               <div className="text-center">
                 <a
-                    href="/vehicles"
+                    href="/searchVehicles"
                     className="inline-block px-8 py-3 border-2 border-[var(--primary-color)] text-[var(--primary-color)]
                     font-medium rounded-full hover:bg-[var(--primary-color)] hover:text-white transition-colors"
                 >
