@@ -20,5 +20,43 @@
       "email": "anee.neu15@gmail.com",
       "number": null
     }
+  ],
+  "vehicles" : [
+    {
+        "id": 1,
+        "type": "car",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsMvEPPysXHGVhfjKyysK-eF8jw19CunqEbQ&s",
+        "title": "Economy Class",
+        "description": "Perfect for city driving",
+        "details": [
+          { "type": "seats", "text": "4 seats" },
+          { "type": "settings", "text": "Automatic" }
+        ],
+        "price": 35
+      },
+      {
+        "id": 2,
+        "type": "car",
+        "image": "https://imgd.aeplcdn.com/600x337/n/cw/ec/106815/creta-exterior-right-front-three-quarter-5.jpeg?isig=0&q=80",
+        "title": "SUV",
+        "description": "Great for family trips",
+        "details": [
+          { "type": "seats", "text": "7 seats" },
+          { "type": "settings", "text": "Automatic" }
+        ],
+        "price": 65
+      },
+      {
+        "id": 3,
+        "type": "bike",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1KwMQrjEob4x1sYv1qXqrzWJDWCaazsEIYA&s",
+        "title": "Sports Bike",
+        "description": "For the thrill seekers",
+        "details": [
+          { "type": "engine", "text": "300cc" },
+          { "type": "fuel", "text": "Petrol" }
+        ],
+        "price": 12
+      }
   ]
 }

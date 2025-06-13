@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button, { ButtonType } from '../custom/Button';
 import { FaUserFriends, FaTachometerAlt, FaGasPump, FaBolt, FaCogs } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router';
+import axios from 'axios';
+import { GLOBAL_URL } from '../../config/url';
 
 enum VehicleType {
-    CAR = 'cars',
-    BIKE = 'bikes',
-    SCOOTER = 'scooters'
+    CAR = 'car',
+    BIKE = 'bike',
+    SCOOTER = 'scooter'
 }
 
 interface VehicleDetail {
@@ -26,11 +28,18 @@ interface Vehicle {
 type VehiclesData ={
     [key in VehicleType] : Vehicle[];
 }
+
+
 const RentRide = () => {
     const [activeVehicle, setActiveVehicle] = useState<VehicleType>(VehicleType.CAR);
+    const [vehicleData, setVehicleData] = useState<VehiclesData>({
+      [VehicleType.CAR] : [],
+      [VehicleType.BIKE] : [],
+      [VehicleType.SCOOTER] : []
+    })
+    const [loading, setLoading] = useState<boolean>(false);
     const location = useLocation();
     const navigate = useNavigate();
-
     const topPadding = location.pathname ==='/searchVehicles' ? 'pt-4' : 'pt-20';
     const isSearchPage = location.pathname === '/searchVehicles';
 
@@ -54,58 +63,30 @@ const RentRide = () => {
           return null;
       }
     }
-    const vehiclesData: VehiclesData = {
-    [VehicleType.CAR]: [
-      {
-        id: 1,
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsMvEPPysXHGVhfjKyysK-eF8jw19CunqEbQ&s',
-        title: 'Economy Class',
-        description: 'Perfect for city driving',
-        details: [
-          { type: 'seats', text: '4 seats' },
-          { type: 'settings', text: 'Automatic' }
-        ],
-        price: '$35/day'
-      },
-      {
-        id: 2,
-        image: 'https://imgd.aeplcdn.com/600x337/n/cw/ec/106815/creta-exterior-right-front-three-quarter-5.jpeg?isig=0&q=80',
-        title: 'SUV',
-        description: 'Great for family trips',
-        details: [
-          { type: 'seats', text: '7 seats' },
-          { type: 'settings', text: 'Automatic' }
-        ],
-        price: '$65/day'
+
+    useEffect(() => {
+      const fetchVehicles = async() => {
+        setLoading(true)
+        try{
+          const response = await axios.get(`${GLOBAL_URL}/vehicles`);
+          const allVehicles = response.data;
+
+          const groupedData: VehiclesData = {
+            [VehicleType.CAR] : allVehicles.filter((vehicle) => vehicle.type === VehicleType.CAR),
+            [VehicleType.BIKE] : allVehicles.filter((vehicle) => vehicle.type === VehicleType.BIKE),
+            [VehicleType.SCOOTER] : allVehicles.filter((vehicle) => vehicle.type === VehicleType.SCOOTER),
+          }
+
+          setVehicleData(groupedData);
+
+        } catch (error){
+          console.log("Error fetching data", error)
+      } finally {
+        setLoading(false);
       }
-    ],
-    [VehicleType.BIKE]: [
-      {
-        id: 1,
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1KwMQrjEob4x1sYv1qXqrzWJDWCaazsEIYA&s',
-        title: 'Sports Bike',
-        description: 'For the thrill seekers',
-        details: [
-          { type: 'engine', text: '300cc' },
-          { type: 'fuel', text: 'Petrol' }
-        ],
-        price: '$25/day'
       }
-    ],
-    [VehicleType.SCOOTER]: [
-      {
-        id: 1,
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3MwhQPvHb6b199ERjcNLwOCdo-Oa8MbgXPg&s',
-        title: 'Electric Scooter',
-        description: 'Eco-friendly city travel',
-        details: [
-          { type: 'range', text: '60km range' },
-          { type: 'speed', text: '45km/h' }
-        ],
-        price: '$15/day'
-      }
-    ]
-  };
+      fetchVehicles();
+    }, [])
 
     const tabs = [
         {id: VehicleType.CAR, label: 'Car'},
@@ -113,12 +94,19 @@ const RentRide = () => {
         {id: VehicleType.SCOOTER, label: 'Scooter'}
     ]
 
-    const handleViewDetails = () => {
-      navigate('/viewDetails');
+    const handleTabChange = (type:VehicleType) => {
+      setActiveVehicle(type);
+    }
+
+    const handleViewDetails = (id: number) => {
+      navigate(`/viewDetails/${id}`);
     }
 
   return (
     <section className= {`bg-white ${topPadding} `} id='#rent'>
+      {loading &&(
+      <span className='text-xl text-gray-500'> Loading Vehicle Data.........</span>
+      )}
         <div className="container px-24 pt-40 pb-24 lg:pb-24 lg:py-12">
             <div className="flex flex-col items-center mb-6">
                 <h2 className=" relative text-3xl font-bold text-center mb-8 text-gray-900">Rent Your Perfect Ride
@@ -152,7 +140,7 @@ const RentRide = () => {
                         key={tab.id}
                         className={`px-6 py-2 rounded-full font-medium transiiton-colors 
                         ${ activeVehicle === tab.id ? 'bg-[var(--primary-color)] text-white' : 'text-gray-700 hover:bg-gray-200'}`}
-                        onClick={() => setActiveVehicle(tab.id)}
+                        onClick={() => handleTabChange(tab.id)}
                         >
                             {tab.label}
                         </button>
@@ -162,7 +150,17 @@ const RentRide = () => {
 
             {/* Vehicle Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {vehiclesData[activeVehicle].map((vehicle) => (
+
+               {vehicleData[activeVehicle].length === 0 && (
+                  <div className="col-span-full text-center py-12">
+                    <h3 className="text-xl font-semibold text-gray-700">
+                      No vehicles available
+                    </h3>
+
+                  </div>
+              )}
+            
+            {vehicleData[activeVehicle].map((vehicle) => (
                 <div
                 key={`${activeVehicle}-${vehicle.id}`}
                 className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -191,7 +189,7 @@ const RentRide = () => {
 
                     <div>
                       <span className="text-lg font-semibold text-[var(--primary-color)]">
-                        {vehicle.price}
+                        Rs. {vehicle.price}/hr
                       </span>
                     </div>
                    </div> 
@@ -199,7 +197,7 @@ const RentRide = () => {
                     
                     <div className="flex items-center justify-between m-4">
                       <Button variant={ButtonType.primary}>Rent Now</Button>
-                      <Button variant={ButtonType.secondary} onClick={handleViewDetails}> View Details </Button>
+                      <Button variant={ButtonType.secondary} onClick={() => handleViewDetails(vehicle.id)}> View Details </Button>
                     </div>
                 </div>
             ))}

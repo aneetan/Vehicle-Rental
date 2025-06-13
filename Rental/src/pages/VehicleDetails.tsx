@@ -1,7 +1,10 @@
-import React from 'react'
-import { useNavigate } from 'react-router'
-import { FaCalendar, FaGasPump, FaHeart, FaShareAlt, FaStar, FaUsers } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
+import { FaCar, FaCodeBranch, FaCogs, FaGasPump, FaHeart, FaPeopleArrows, FaShareAlt, FaStar} from 'react-icons/fa';
+import { IoMdSpeedometer } from "react-icons/io";
 import Button, { ButtonType } from '../components/custom/Button';
+import axios from 'axios';
+import { GLOBAL_URL } from '../config/url';
 
 interface VehicleSpec {
   label: string;
@@ -9,24 +12,47 @@ interface VehicleSpec {
   icon: React.ReactNode;
 }
 
+interface VehicleDetails{
+  type: string;
+  text: string;
+}
+
+interface Vehicle{
+  id: number;
+  type: string;
+  image: string;
+  title: string;
+  description: string;
+  details : VehicleDetails[],
+  price: number;
+}
+
 const VehicleDetails = () => {
+  let params = useParams();
+  const [vehicle, setVehicle] = useState<Vehicle>({
+    id: 0,
+    type: "",
+    image: "",
+    title: "",
+    description: "",
+    details: [],
+    price: 0
+  });
     const navigate = useNavigate();
 
-     const vehicle = {
-        id: 1,
-        title: '2023 Tesla Model S Plaid',
-        price: '$89,990',
-        rating: 4.8,
-        reviewCount: 124,
-        description: 'The Tesla Model S Plaid is the highest-performance version of the Model S, featuring a tri-motor setup, 1,020 horsepower, and a 0-60 mph time of just 1.99 seconds.',
-    };
-
-    const specs: VehicleSpec[] = [
-        { label: 'Seats', value: '5', icon: <FaUsers className="text-[var(--primary-color)] " /> },
-        { label: 'Fuel', value: 'Electric', icon: <FaUsers className="text-[var(--primary-color)] " /> },
-        { label: 'Year', value: '2023', icon: <FaCalendar className="text-[var(--primary-color)] " /> },
-        { label: 'Mileage', value: '1,200 mi', icon: <FaGasPump className="text-[var(--primary-color)] " /> },
-    ];
+    useEffect(() => {
+      try{
+      axios.get(`${GLOBAL_URL}/vehicles/${params.vehicleId}`)
+        .then(response => {
+          setVehicle(response.data);
+        })
+        .then(error => {
+          console.log(error)
+        })
+      } catch(err){
+        console.log(err)
+      }
+    } , [])
 
 
     const handleVehicleRent = () => {
@@ -41,9 +67,9 @@ const VehicleDetails = () => {
         {/* Left Column - Image Carousel */}
         <div className="lg:w-1/2">
 
-                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhawhHOk2n0ohd9-LdQc0-KIOI3JXAWTjfA&s'
+                <img src={vehicle.image}
                     alt='vehicle image'
-                    className='w-[180%] rounded-xl'
+                    className='w-[100%] rounded-xl'
                 />
             {/* </div> */}
           </div>
@@ -66,9 +92,9 @@ const VehicleDetails = () => {
             <div className="mt-2 flex items-center gap-2">
               <div className="flex items-center text-yellow-500">
                 <FaStar className="fill-current" />
-                <span className="ml-1 text-gray-700 font-medium">{vehicle.rating}</span>
+                <span className="ml-1 text-gray-700 font-medium">5</span>
               </div>
-              <span className="text-gray-500">({vehicle.reviewCount} reviews)</span>
+              <span className="text-gray-500">( 6 reviews)</span>
               <span className="text-gray-500">•</span>
             </div>
 
@@ -77,14 +103,21 @@ const VehicleDetails = () => {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-4">
-              {specs.map((spec) => (
-                <div key={spec.label} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+              {vehicle.details.map((spec, index) => (
+                <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                   <div className="p-2 bg-white rounded-full">
-                    {spec.icon}
+                    { spec.type === "seats" && (<FaPeopleArrows />)}
+                    { spec.type === "settings" && (<FaCogs />)}
+                    { spec.type === "engine" && (<FaCodeBranch />)}
+                    { spec.type === "fuel" && (<FaGasPump/>)}
+                    { spec.type === "range" && (<FaCar/>)}
+                    { spec.type === "speed" && (<IoMdSpeedometer />)}
+
+
                   </div>
                   <div>
-                    <div className="text-sm text-gray-500">{spec.label}</div>
-                    <div className="font-medium">{spec.value}</div>
+                    <div className="text-sm text-gray-500">{spec.type}</div>
+                    <div className="font-medium">{spec.text}</div>
                   </div>
                 </div>
               ))}
