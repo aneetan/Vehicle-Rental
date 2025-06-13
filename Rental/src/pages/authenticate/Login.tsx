@@ -6,6 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../firebase/auth';
 import { useNavigate } from 'react-router';
 import { firebaseLoginErrorMessages } from '../../firebase/firebaseErrors';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { auth } from '../../firebase/firebase';
+import axios from 'axios';
+import { GLOBAL_URL } from '../../config/url';
 
 interface User{
   email: string,
@@ -39,6 +43,7 @@ const Login = () => {
 
     try {
       await doSignInWithEmailAndPassword(formData);
+      console.log("logged in user" + formData.email)
       navigate("/");
     } catch (e: unknown) {
       let message = "An unknown error occurred";
@@ -57,9 +62,25 @@ const Login = () => {
   const handleGoogleLogin = async(e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsGoogleLoading(true);
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
      try {
-      await doSignInWithGoogle();
-      console.log("Logij with google")
+      const request = await signInWithPopup(auth, provider);
+      const user = request.user;
+      const data = {
+        fullName: user.displayName,
+        email: user.email,
+        number: user.phoneNumber
+      }
+
+      axios.post(`${GLOBAL_URL}/users`, data)
+        .then(response => {
+          navigate('/success')
+        })
+        .then(error => {
+          console.log(error)
+        })
+      console.log("Logged with google")
       navigate('/');
     } catch (err) {
       console.error(err);

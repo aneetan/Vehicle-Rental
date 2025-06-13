@@ -17,7 +17,7 @@ export const doSignInWithEmailAndPassword = (props: UserDetails) => {
 export const doSignInWithGoogle = async() => {
     //get provider value
     const provider = new GoogleAuthProvider();
-    const result = signInWithRedirect(auth, provider); 
+    const result = await signInWithRedirect(auth, provider); 
     //save the result to firestore (result.user) if required
     return result
 }

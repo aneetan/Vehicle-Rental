@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Button, { ButtonType } from '../../components/custom/Button';
 import Image from '../../assets/images/register.png';
 import Logo from '../../components/Logo'; 
-import { FcGoogle } from 'react-icons/fc';
 import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../../firebase/auth';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { GLOBAL_URL } from '../../config/url';
 
 interface UserDetails {
   email: string;
@@ -136,13 +137,25 @@ const Register = () => {
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+    if(validateForm()){
+      const data = {
+        email: formData.email,
+        fullName: formData.fullName,
+        password: formData.password,
+        phone: formData.phone
+      }
 
-    // Clear previous Firebase error
-    setErrors(prev => ({ ...prev, firebase: '' }));
-
-    if(!validateForm()){
-      return;
+      //Make the post request to server
+      axios.post(`${GLOBAL_URL}/users`, data)
+        .then(response => {
+          navigate('/login')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
+    // Clear previous Firebase error
+      setErrors(prev => ({ ...prev, firebase: '' }));
 
      try {
         const result = await doCreateUserWithEmailAndPassword({
