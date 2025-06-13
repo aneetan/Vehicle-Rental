@@ -28,6 +28,7 @@ const Navbar = () => {
   const[isActive, setIsActive] = useState<NavRoutes>("HOME");
   const navigate = useNavigate();
   const location = useLocation();
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const navItems : NavItem[] = [
     { key: "HOME", label: "Home", path: AppRoutes.HOME },
@@ -49,6 +50,11 @@ const Navbar = () => {
       }
     setIsOpen(false);
   };
+
+  const handleLogout = () =>{
+    localStorage.setItem("isLoggedIn", "false");
+    navigate('/')
+  }
 
   // Set active route based on current location
   useEffect(() => {
@@ -130,7 +136,11 @@ const Navbar = () => {
 
         {/* -------------- Login Button --------------- */} 
         <div className="hidden md:flex items-center mr-12">
-            <Button variant={ButtonType.primary} onClick={() => navigate('/login')}> Login </Button>
+              {(isLoggedIn === "true")? (
+                <Button variant={ButtonType.primary} onClick={handleLogout}> Logout </Button>
+              ): (
+                <Button variant={ButtonType.primary} onClick={() => navigate('/login')}> Login </Button>
+              )}
         </div> 
       </div>
 
@@ -152,7 +162,11 @@ const Navbar = () => {
             ))}
 
             <li>
-              <Button variant='primary'> Login </Button>
+              {isLoggedIn? (
+                <Button variant={ButtonType.primary} onClick={handleLogout}> Logout </Button>
+              ): (
+                <Button variant={ButtonType.primary} onClick={() => navigate('/login')}> Login </Button>
+              )}
             </li>
           </ul>
         </div>

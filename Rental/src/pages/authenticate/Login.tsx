@@ -43,7 +43,7 @@ const Login = () => {
 
     try {
       await doSignInWithEmailAndPassword(formData);
-      console.log("logged in user" + formData.email)
+      localStorage.setItem("isLoggedIn", "true");
       navigate("/");
     } catch (e: unknown) {
       let message = "An unknown error occurred";

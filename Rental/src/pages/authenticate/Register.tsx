@@ -153,7 +153,6 @@ const Register = () => {
         .catch(error => {
           console.log(error)
         })
-    }
     // Clear previous Firebase error
       setErrors(prev => ({ ...prev, firebase: '' }));
 
@@ -186,6 +185,7 @@ const Register = () => {
             setErrors(prev => ({ ...prev, firebase: 'An unknown error occurred' }));
           }
       }
+    }
   };
 
   return (
